@@ -1,21 +1,42 @@
+{% style %}
+  p {
+    margin: 0;
+  }
+
+{% endstyle %}
+
 {%- for block in section.blocks -%}
   {%- case block.type -%}
     {%- when 'announcement' -%}
-      <div class="announcement-bar color-{{ block.settings.color_scheme }} gradient" role="region" aria-label="{{ 'sections.header.announcement' | t }}" {{ block.shopify_attributes }}>
-        {%- if block.settings.text != blank -%}
-          {%- if block.settings.link != blank -%}
-            <a href="{{ block.settings.link }}" class="announcement-bar__link link link--text focus-inset animate-arrow">
-          {%- endif -%}
-              <p class="announcement-bar__message h5">
-                {{ block.settings.text | escape }}
-                {%- if block.settings.link != blank -%}
-                  {% render 'icon-arrow' %}
-                {%- endif -%}
-              </p>
-          {%- if block.settings.link != blank -%}
-            </a>
-          {%- endif -%}
-        {%- endif -%}
+      <div class="announcement row text-center align-items-center" style="background-color: {{ block.settings.announcement_background }}; color: {{ block.settings.text_color }};">
+        <div class="col-12 col-md-4">
+          {% if block.settings.phone_number != blank %}
+            <div class="phone_number">
+              {{ block.settings.phone_number }}
+            </div>
+          {% endif %}
+          {% if block.settings.email != blank %}
+          <div class="email">
+            {{ block.settings.email }}
+          </div>
+          {% endif %}
+          
+        </div>
+        <div class="col-12 col-md-4">
+          {% if block.settings.message != blank %}
+          <div class="message mb-0">
+            {{ block.settings.message }}
+            
+          </div>
+          {% endif %}
+        </div>
+        <div class="col-12 col-md-4">
+          {% if block.settings.address != blank %}
+          <div class="address ">
+            {{ block.settings.address }}
+          </div>
+          {% endif %}
+        </div>
       </div>
   {%- endcase -%}
 {%- endfor -%}
@@ -30,43 +51,44 @@
       "name": "t:sections.announcement-bar.blocks.announcement.name",
       "settings": [
         {
+          "type": "color",
+          "id": "announcement_background",
+          "label": "Background-Color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text-Color",
+          "default": "#010101"
+        },
+        {
           "type": "text",
-          "id": "text",
-          "default": "Welcome to our store",
-          "label": "t:sections.announcement-bar.blocks.announcement.settings.text.label"
+          "id": "phone_number",
+          "default": "999-999-9999",
+          "label": "Phone Number"
         },
         {
-          "type": "select",
-          "id": "color_scheme",
-          "options": [
-            {
-              "value": "background-1",
-              "label": "t:sections.announcement-bar.blocks.announcement.settings.color_scheme.options__1.label"
-            },
-            {
-              "value": "background-2",
-              "label": "t:sections.announcement-bar.blocks.announcement.settings.color_scheme.options__2.label"
-            },
-            {
-              "value": "inverse",
-              "label": "t:sections.announcement-bar.blocks.announcement.settings.color_scheme.options__3.label"
-            },
-            {
-              "value": "accent-1",
-              "label": "t:sections.announcement-bar.blocks.announcement.settings.color_scheme.options__4.label"
-            },
-            {
-              "value": "accent-2",
-              "label": "t:sections.announcement-bar.blocks.announcement.settings.color_scheme.options__5.label"
-            }
-          ],
-          "default": "accent-1",
-          "label": "t:sections.announcement-bar.blocks.announcement.settings.color_scheme.label"
+          "type": "text",
+          "id": "email",
+          "default": "support@email.com",
+          "label": "Email",
+          "info": "Only put support email"
         },
         {
-          "type": "url",
-          "id": "link",
-          "label": "t:sections.announcement-bar.blocks.announcement.settings.link.label"
+          "type": "text",
+          "id": "address",
+          "default": "123 Main St",
+          "label": "Address"
+          
+        },
+        
+        {
+          "type": "richtext",
+          "id": "message",
+          "default": "<p>Welcome to our store</p>",
+          "label": "Announcement Message"
+          
         }
       ]
     }
