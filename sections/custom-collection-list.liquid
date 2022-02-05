@@ -1,0 +1,81 @@
+{% schema %}
+{
+    "name": "Custom Collections List",
+    "max_blocks": 3,
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Section Title",
+            "default": "#As Seen In the Mall"
+        }
+    
+    
+    ],
+    
+    "blocks": [
+        {
+            "type": "collection",
+            "name": "Collection",
+            "settings": [
+                {
+                    "type": "collection",
+                    "id": "collection",
+                    "label": "Collection"
+                },
+                {
+                    "type": "text",
+                    "id": "heading",
+                    "label": "Heading",
+                    "default": "New Arrivals"
+                },
+                {
+                    "type": "text",
+                    "id": "sub_heading",
+                    "label": "Sub Heading",
+                    "default": "Shop Popular Items"
+                },
+                {
+                    "type": "url",
+                    "id": "button_link",
+                    "label": "Button link"
+                },
+                {
+                    "type": "text",
+                    "id": "button_text",
+                    "label": "Button text",
+                    "default": "Shop Now"
+                }
+            
+            ]
+        }
+    
+    ],
+    "presets": [
+        {
+            "name": "Custom Collections List",
+            "blocks": [
+                {
+                    "type": "collection"
+                },
+                {
+                    "type": "collection"
+                },
+                {
+                    "type": "collection"
+                }
+            
+            ]
+        }
+    
+    ]
+        
+    
+}
+
+
+
+
+
+
+{% endschema %}
