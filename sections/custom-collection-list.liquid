@@ -1,3 +1,49 @@
+{% if section.settings.title != blank %}
+    <div class="section_title">
+        {{ section.settings.title }}
+    </div>
+{% endif %}
+
+<div class="custom-collection-list">
+    {% for block in section.blocks %}
+        <div class="collection-block">
+            {% if block.settings.image != blank %}
+                <img srcset="{%- if block.settings.image.width >= 165 -%}{{ block.settings.image | img_url: '165x' }} 165w,{%- endif -%}
+                                      {%- if block.settings.image.width >= 360 -%}{{ block.settings.image | img_url: '360x' }} 360w,{%- endif -%}
+                                      {%- if block.settings.image.width >= 535 -%}{{ block.settings.image | img_url: '535x' }} 535w,{%- endif -%}
+                                      {%- if block.settings.image.width >= 750 -%}{{ block.settings.image | img_url: '750x' }} 750w,{%- endif -%}
+                                      {%- if block.settings.image.width >= 1070 -%}{{ block.settings.image | img_url: '1070x' }} 1070w,{%- endif -%}
+                                      {%- if block.settings.image.width >= 1500 -%}{{ block.settings.image | img_url: '1500x' }} 1500w,{%- endif -%}
+                                      {{ block.settings.image | img_url: 'master' }} {{ block.settings.image.width }}w"
+                    src="{{ block.settings.image | img_url: '1500x' }}" alt="{{ block.settings.image.alt | escape }}"
+                    loading="lazy">
+                {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}
+                
+                <div class="custom-collection-list__text-section">
+                    {% if block.settings.heading != blank %}
+                        <div class="text-section__heading">
+                            {{ block.settings.heading }}
+                        </div>
+                    {% endif %}
+                    {% if block.settings.sub_heading != blank %}
+                    <div class="text-section__sub-heading">
+                        {{ block.settings.sub_heading }}
+                    </div>
+                    {% endif %}
+                    {% if block.settings.button_text != blank %}
+                        <div class="text-section__button">
+                            <a href="{{ block.settings.collection.url }}">
+                                {{ block.settings.button_text }}
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+        </div>
+    {% endfor %}
+</div>
+
 {% schema %}
 {
     "name": "Custom Collections List",
@@ -24,6 +70,11 @@
                     "label": "Collection"
                 },
                 {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Collection Image"
+                },
+                {
                     "type": "text",
                     "id": "heading",
                     "label": "Heading",
@@ -34,11 +85,6 @@
                     "id": "sub_heading",
                     "label": "Sub Heading",
                     "default": "Shop Popular Items"
-                },
-                {
-                    "type": "url",
-                    "id": "button_link",
-                    "label": "Button link"
                 },
                 {
                     "type": "text",
