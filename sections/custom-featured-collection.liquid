@@ -1,0 +1,58 @@
+{% schema %}
+{
+    "name": "Custom Feat Collection",
+    "settings": [
+        {
+            "type": "text",
+            "id": "section_title",
+            "label": "Section Title",
+            "default": "#Featured on Fashion Week"
+        },
+        {
+            "type": "collection",
+            "id": "custom_featured_collection",
+            "label": "Collection"
+        },
+        {
+            "type": "range",
+            "id": "products_to_show",
+            "min": 4,
+            "max": 16,
+            "step": 4,
+            "default": 4,
+            "label": "Products to Display"
+        },
+        {
+            "type": "color",
+            "id": "button_color",
+            "label": "Button Color",
+            "default": "#333"
+        },
+        {
+            "type": "color",
+            "id": "button_hover_color",
+            "label": "Button Hover Color",
+            "default": "#737171"
+        },
+        {
+            "type": "color",
+            "id": "sold_old_color",
+            "label": "Sold Out Color",
+            "default": "#000000"
+        },
+        {
+            "type": "color",
+            "id": "on_sale_color",
+            "label": "On Sale Color",
+            "default": "#900"
+        }
+    
+    ],
+    "presets": [
+        {
+            "name": "Custom Feat Collection"
+        }
+    
+    ]
+}
+{% endschema %}
