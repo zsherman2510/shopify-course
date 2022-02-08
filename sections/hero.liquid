@@ -81,7 +81,7 @@
             loading="lazy"
             >
         {%- else -%}
-            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            <img src="https://images.pexels.com/photos/432059/pexels-photo-432059.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
     {% endif %}
     <div class="text-section {{ section.settings.text_alignment }}">
         {% for block in section.blocks %}

@@ -1,9 +1,9 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "hero": {
+      "type": "hero",
       "settings": {
-        "desktop_content_position": "middle-center"
+        "text-alignment": "center"
       },
       "blocks": {
         "heading": {
@@ -12,95 +12,51 @@
             "heading": "Talk about your brand"
           }
         },
-        "button": {
-          "type": "buttons",
+        "title": {
+          "type": "title",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
+            "title": "Example Title"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop all",
+            "button_link": "shopify://collections/all",
             "button_label_2": ""
           }
         }
       },
       "block_order": [
         "heading",
+        "title",
         "button"
       ]
     },
-    "rich_text": {
-      "type": "rich-text",
+    
+    "custom-collection-list": {
+      "type": "custom-collection-list",
       "blocks": {
-        "heading": {
-          "type": "heading"
+        "collection1": {
+          "type": "collection"
         },
-        "text": {
-          "type": "text"
+        "collection2": {
+          "type": "collection"
         },
-        "button": {
-          "type": "button"
-        }
-      },
-      "block_order": [
-        "heading",
-        "text",
-        "button"
-      ]
-    },
-    "featured_products": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Featured products",
-        "collection": "all",
-        "image_ratio": "square"
-      }
-    },
-    "collage": {
-      "type": "collage",
-      "blocks": {
-        "video": {
-          "type": "video"
-        },
-        "product": {
-          "type": "product"
-        },
-        "collection": {
+        "collection3": {
           "type": "collection"
         }
       },
       "block_order": [
-        "video",
-        "product",
-        "collection"
-      ]
-    },
-    "video": {
-      "type": "video"
-    },
-    "multi_column": {
-      "type": "multicolumn",
-      "blocks": {
-        "column1": {
-          "type": "column"
-        },
-        "column2": {
-          "type": "column"
-        },
-        "column3": {
-          "type": "column"
-        }
-      },
-      "block_order": [
-        "column1",
-        "column2",
-        "column3"
+        "collection1",
+        "collection2",
+        "collection3"
       ]
     }
   },
   "order": [
-    "image_banner",
-    "rich_text",
-    "featured_products",
-    "collage",
-    "video",
-    "multi_column"
+    "hero",
+    "custom-collection-list"
+    
   ]
 }

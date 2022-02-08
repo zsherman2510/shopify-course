@@ -1,3 +1,71 @@
+{% if section.settings.section_title != blank %}
+    <div class="container my-3">
+        <div class="section_title">
+            {{ section.settings.section_title }}
+        </div>
+    </div>
+{% endif %}
+
+<div class="custom_featured_collection d-flex flex-row flex-wrap justify-content-evenly px-3">
+    {% for product in section.settings.custom_featured_collection.products limit: section.settings.products_to_show %}
+        <div class="product col-10 col-sm-6 col-md-4 col-lg-3">
+            <div class="product_img">
+                <a href="{{ product.url }}">
+                    <img srcset="{%- if product.featured_media.width >= 165 -%}{{ product.featured_media | img_url: '165x' }} 165w,{%- endif -%}
+                                                      {%- if product.featured_media.width >= 360 -%}{{ product.featured_media | img_url: '360x' }} 360w,{%- endif -%}
+                                                      {%- if product.featured_media.width >= 535 -%}{{ product.featured_media | img_url: '535x' }} 535w,{%- endif -%}
+                                                      {%- if product.featured_media.width >= 750 -%}{{ product.featured_media | img_url: '750x' }} 750w,{%- endif -%}
+                                                      {%- if product.featured_media.width >= 1070 -%}{{ product.featured_media | img_url: '1070x' }} 1070w,{%- endif -%}
+                                                      {%- if product.featured_media.width >= 1500 -%}{{ product.featured_media | img_url: '1500x' }} 1500w,{%- endif -%}
+                                                      {{ product.featured_media | img_url: 'master' }} {{ product.featured_media.width }}w"
+                        src="{{ product.featured_media | img_url: '533x' }}" alt="{{ product.featured_media.alt | escape }}"
+                        sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width:
+                        990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
+                        alt="{{ card_product.featured_media.alt | escape }}"
+                        loading="lazy">
+                </a>
+            </div>
+            <div class="product_info d-flex flex-column justify-content-between">
+                <div class="product_vendor d-flex">
+                    {{ product.vendor }}
+                </div>
+                {% if product.available != true %}
+                    <div class="sold-out">
+                        Sold Out
+                    </div>
+                {% endif %}
+                {% if product.available and product.compare_at_price >= product.price %}
+                    <div class="on-sale">
+                        On Sale
+                    </div>
+                {% endif %}
+                <div class="custom_product_title">
+                    <a href="{{ product.url }}">
+                        {{ product.title }}
+                    </a>
+                </div>
+                {% if product.available and produtc.compare_at_price >= product.price %}
+                    <div class="price">
+                        {{ product.price | money_with_currency }} <span class="on-sale-price">
+                            {{ product.compare_at_price | money_with_currency }}
+                        </span>
+                    </div>
+                {% elsif product.available != true %}
+                        <div class="on-sale-price">
+                            {{ product.price | money_with_currency }}
+                        </div>
+                        
+                {% else %}
+                    <div class="price">
+                        {{ product.price | money_with_currency }}
+                    </div>
+                {% endif %}
+            </div>
+            
+        </div>
+    {% endfor %}
+</div>
+
 {% schema %}
 {
     "name": "Custom Feat Collection",
