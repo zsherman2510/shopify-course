@@ -1,3 +1,54 @@
+{% style %}
+.custom_featured_collection .product {
+    margin-bottom: 50px;
+    padding: 12px;
+}
+
+.custom_featured_collection .product .product_info {
+    height: 115px;
+}
+
+
+.custom_featured_collection .product .custom_product_title a{
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: .8px;
+    color: {{ section.settings.button_color }}
+}
+
+.custom_featured_collection .product .custom_product_title a:hover {
+    color: {{ section.settings.button_hover_color }}
+}
+
+.product .product_info .product_vendor {
+    font-size: 10px;
+    color: gray;
+}
+
+.product .product_info .price {
+    font-size: 14px;
+}
+
+.product .product_info .on-sale {
+    font-size: 11px;
+    color: {{ section.settings.on_sale_color }}
+}
+
+.product .product_info .sold-out {
+    font-size: 11px;
+    font-style: italic;
+    color: {{ section.settings.sold_out_color }}
+}
+
+.product_info .on-sale-price {
+    text-decoration: line-through;
+    font-size: 12px;
+}
+{% endstyle %}
+
+
+
 {% if section.settings.section_title != blank %}
     <div class="container my-3">
         <div class="section_title">

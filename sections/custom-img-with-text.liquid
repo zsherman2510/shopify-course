@@ -1,0 +1,228 @@
+{% style %}
+.image_beside_text {
+    height: 550px;
+    
+}
+.image_beside_text img {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    max-height: 350px;
+}
+
+.image_beside_text .text-section {
+    height: 100%;
+    padding: 20px;
+    text-align: center;
+}
+
+.image_beside_text .text-section .heading {
+    font-size: 18px;
+    font-weight: 600;
+    
+}
+
+.image_beside_text .text-section .btn {
+    width: 300px;
+    margin: 0 auto;
+    font-size: 18px;
+}
+
+{% endstyle %}
+
+
+{% if section.settings.image_beside_text_title != blank %}
+    <div class="container mb-5 mt-5">
+        <div class="section_title">
+            {{ section.settings.image_beside_text_title }}
+        </div>
+    </div>
+{% endif %}
+
+<div class="image_beside_text">
+    {% case section.settings.image_placement %}
+        {% when "left" %}
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    {% if section.settings.image != blank %}
+                        <img srcset="{%- if section.settings.image.width >= 165 -%}{{ section.settings.image | img_url: '165x' }} 165w,{%- endif -%}
+                                              {%- if section.settings.image.width >= 360 -%}{{ section.settings.image | img_url: '360x' }} 360w,{%- endif -%}
+                                              {%- if section.settings.image.width >= 535 -%}{{ section.settings.image | img_url: '535x' }} 535w,{%- endif -%}
+                                              {%- if section.settings.image.width >= 750 -%}{{ section.settings.image | img_url: '750x' }} 750w,{%- endif -%}
+                                              {%- if section.settings.image.width >= 1070 -%}{{ section.settings.image | img_url: '1070x' }} 1070w,{%- endif -%}
+                                              {%- if section.settings.image.width >= 1500 -%}{{ section.settings.image | img_url: '1500x' }} 1500w,{%- endif -%}
+                                              {{ section.settings.image | img_url: 'master' }} {{ section.settings.image.width }}w"
+                            src="{{ section.settings.image | img_url: '1500x' }}" alt="{{ section.settings.image.alt | escape }}"
+                            loading="lazy">
+                        {%- else -%}
+                        <img src="https://images.pexels.com/photos/432059/pexels-photo-432059.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                            alt="">
+                    {% endif %}
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="text-section d-flex flex-column justify-content-evenly align-center">
+                        {% for block in section.blocks %}
+                            <div class="heading">
+                                {{ block.settings.heading }}
+                            </div>
+                            <div class="text">
+                                {{ block.settings.text }}
+                            </div>
+                            <button class="btn" style="color: {{ block.settings.button_text-color }} background: {{ block.settings.button_color }}" href={{ block.settings.button_link }}>
+                                {{ block.settings.button_label }}
+                            </button>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="text-section d-flex flex-column justify-content-evenly align-center">
+                        {% for block in section.blocks %}
+                        <div class="heading">
+                            {{ block.settings.heading }}
+                        </div>
+                        <div class="text">
+                            {{ block.settings.text }}
+                        </div>
+                        <button class="btn"
+                            style="color: {{ block.settings.button_text-color }}; background: {{ block.settings.button_color }};" href={{
+                            block.settings.button_link }}>
+                            {{ block.settings.button_label }}
+                        </button>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    {% if section.settings.image != blank %}
+                    <img srcset="{%- if section.settings.image.width >= 165 -%}{{ section.settings.image | img_url: '165x' }} 165w,{%- endif -%}
+                                                              {%- if section.settings.image.width >= 360 -%}{{ section.settings.image | img_url: '360x' }} 360w,{%- endif -%}
+                                                              {%- if section.settings.image.width >= 535 -%}{{ section.settings.image | img_url: '535x' }} 535w,{%- endif -%}
+                                                              {%- if section.settings.image.width >= 750 -%}{{ section.settings.image | img_url: '750x' }} 750w,{%- endif -%}
+                                                              {%- if section.settings.image.width >= 1070 -%}{{ section.settings.image | img_url: '1070x' }} 1070w,{%- endif -%}
+                                                              {%- if section.settings.image.width >= 1500 -%}{{ section.settings.image | img_url: '1500x' }} 1500w,{%- endif -%}
+                                                              {{ section.settings.image | img_url: 'master' }} {{ section.settings.image.width }}w"
+                        src="{{ section.settings.image | img_url: '1500x' }}" alt="{{ section.settings.image.alt | escape }}"
+                        loading="lazy">
+                    {%- else -%}
+                    <img src="https://images.pexels.com/photos/432059/pexels-photo-432059.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                        alt="">
+                    {% endif %}
+                </div>
+            </div>
+    {% endcase %}
+</div>
+
+
+
+
+{% schema %}
+    {
+        "name": "Custom Img with Text",
+        "settings": [
+            {
+                "type": "select",
+                "id": "image_placement",
+                "label": "Image Placement",
+                "options": [
+                    {
+                        "value": "left",
+                        "label": "Left"
+                    },
+                    {
+                        "value": "right",
+                        "label": "Right"
+                    }
+                ],
+                "default": "left"
+            },
+            {
+                "type": "text",
+                "id": "image_beside_text_title",
+                "label": "Title",
+                "default": "#Featured On Fashion Week"
+            },
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Image"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "heading",
+                "name": "Heading",
+                "limit": 1,
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "heading",
+                        "default": "Talk about your product, collection or brand",
+                        "label": "Heading"
+                    }
+                ]
+            },
+            {
+                "type": "text",
+                "name": "Text",
+                "limit": 1,
+                "settings": [
+                    {
+                        "type": "richtext",
+                        "id": "text",
+                        "default": "<p>A section where you can disclose information about your website, current promotion, or anything that fits.</p>",
+                        "label": "Body Text"
+                    }
+                ]
+            },
+            {
+                "type": "button",
+                "name": "Button",
+                "limit": 1,
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "button_label",
+                        "default": "Shop Now",
+                        "label": "Button"
+                    },
+                    {
+                        "type": "url",
+                        "id": "button_link",
+                        "label": "t:sections.image-with-text.blocks.button.settings.button_link.label"
+                    },
+                    {
+                        "type": "color",
+                        "id": "button_text-color",
+                        "label": "Button Text Color",
+                        "default": "#000"
+                    },
+                    {
+                        "type": "color",
+                        "id": "button_color",
+                        "label": "Button Background Color",
+                        "default": "#eee"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "Image Beside Text",
+                "blocks": [
+                    {
+                        "type": "heading"
+                    },
+                    {
+                        "type": "text"
+                    },
+                    {
+                        "type": "button"
+                    }
+                ]
+            }
+        ]
+    }
+{% endschema %}
